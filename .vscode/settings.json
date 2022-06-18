@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "cstring": "c",
+        "*.ipp": "c"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
+}
