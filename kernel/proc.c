@@ -277,6 +277,7 @@ fork(void)
 
   np->parent = p;
 
+  np->mask = p->mask;
   // copy saved user registers.
   *(np->trapframe) = *(p->trapframe);
 
@@ -693,3 +694,28 @@ procdump(void)
     printf("\n");
   }
 }
+
+// 获取进程数
+uint64
+procnum(void) {
+  int np = 0;
+  struct proc *p;
+  for(p = proc; p < &proc[NPROC]; ++p) {
+    // p->lock must be held when using state
+    acquire(&p->lock);
+    if(p->state != UNUSED) 
+      ++np;
+    release(&p->lock);
+  }
+  return np;
+}
+//void procnum(uint64 *dst)
+//{
+//  *dst = 0;
+//  struct proc *p = proc;
+//
+//  for (; p < &proc[NPROC]; p++) {
+//    if (p->state != UNUSED) 
+//      (*dst)++;
+//  }
+//}

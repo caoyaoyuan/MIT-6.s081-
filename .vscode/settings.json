@@ -1,0 +1,15 @@
+{
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "files.associations": {
+        "types.h": "c",
+        "user.h": "c",
+        "*.tcc": "c",
+        "chrono": "c",
+        "random": "c",
+        "limits": "c",
+        "algorithm": "c",
+        "*.ipp": "c",
+        "mutex": "c",
+        "memory": "c"
+    }
+}
