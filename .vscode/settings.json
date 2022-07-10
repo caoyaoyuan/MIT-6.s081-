@@ -10,6 +10,7 @@
         "algorithm": "c",
         "*.ipp": "c",
         "mutex": "c",
-        "memory": "c"
+        "memory": "c",
+        "param.h": "c"
     }
 }
