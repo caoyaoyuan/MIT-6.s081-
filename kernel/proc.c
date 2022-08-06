@@ -107,6 +107,10 @@ allocproc(void)
 found:
   p->pid = allocpid();
 
+  p->total_tricks = 0;
+  p->alarm_interval = 0;
+  p->alarm_handler = (void(*)())1;
+  p->is_alarming = 0;
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0){
     release(&p->lock);
@@ -139,6 +143,11 @@ freeproc(struct proc *p)
   if(p->trapframe)
     kfree((void*)p->trapframe);
   p->trapframe = 0;
+
+  p->alarm_handler = 0;
+  p->is_alarming = 0;
+  p->alarm_interval = 0;
+  p->total_tricks = 0;
   if(p->pagetable)
     proc_freepagetable(p->pagetable, p->sz);
   p->pagetable = 0;

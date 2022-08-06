@@ -1,0 +1,5 @@
+{
+    "clangd.arguments": [
+        "--compile-commands-dir=/home/joe/linux_learn/xv6-labs-2020/compile_commands.json"
+    ]
+}

@@ -20,10 +20,10 @@ struct context {
 
 // Per-CPU state.
 struct cpu {
-  struct proc *proc;          // The process running on this cpu, or null.
-  struct context context;     // swtch() here to enter scheduler().
-  int noff;                   // Depth of push_off() nesting.
-  int intena;                 // Were interrupts enabled before push_off()?
+  struct proc *proc;      // The process running on this cpu, or null.
+  struct context context; // swtch() here to enter scheduler().
+  int noff;               // Depth of push_off() nesting.
+  int intena;             // Were interrupts enabled before push_off()?
 };
 
 extern struct cpu cpus[NCPU];
@@ -87,12 +87,12 @@ struct proc {
   struct spinlock lock;
 
   // p->lock must be held when using these:
-  enum procstate state;        // Process state
-  struct proc *parent;         // Parent process
-  void *chan;                  // If non-zero, sleeping on chan
-  int killed;                  // If non-zero, have been killed
-  int xstate;                  // Exit status to be returned to parent's wait
-  int pid;                     // Process ID
+  enum procstate state; // Process state
+  struct proc *parent;  // Parent process
+  void *chan;           // If non-zero, sleeping on chan
+  int killed;           // If non-zero, have been killed
+  int xstate;           // Exit status to be returned to parent's wait
+  int pid;              // Process ID
 
   // these are private to the process, so p->lock need not be held.
   uint64 kstack;               // Virtual address of kernel stack
@@ -103,4 +103,43 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+
+  int alarm_interval;
+  void (*alarm_handler)();
+  int total_tricks;
+  int is_alarming;
+
+  uint64 saved_epc; // saved user program counter
+  uint64 saved_ra;
+  uint64 saved_sp;
+  uint64 saved_gp;
+  uint64 saved_tp;
+  uint64 saved_t0;
+  uint64 saved_t1;
+  uint64 saved_t2;
+  uint64 saved_t3;
+  uint64 saved_t4;
+  uint64 saved_t5;
+  uint64 saved_t6;
+  uint64 saved_a0;
+  uint64 saved_a1;
+  uint64 saved_a2;
+  uint64 saved_a3;
+  uint64 saved_a4;
+  uint64 saved_a5;
+  uint64 saved_a6;
+  uint64 saved_a7;
+  uint64 saved_s0;
+  uint64 saved_s1;
+  uint64 saved_s2;
+  uint64 saved_s3;
+  uint64 saved_s4;
+  uint64 saved_s5;
+  uint64 saved_s6;
+  uint64 saved_s7;
+  uint64 saved_s8;
+  uint64 saved_s9;
+  uint64 saved_s10;
+  uint64 saved_s11;
+  // =================================
 };
