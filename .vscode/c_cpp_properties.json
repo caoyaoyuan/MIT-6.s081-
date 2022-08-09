@@ -1,0 +1,3 @@
+{
+    "compileCommands": "${workspaceFolder}/compile_commands.json"
+}
